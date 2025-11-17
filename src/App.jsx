@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import AuthModal from './components/AuthModal'
 import GameCard from './components/GameCard'
+import Hero from './components/Hero'
+import Footer from './components/Footer'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -26,9 +28,11 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Navbar user={user} onLoginClick={()=>setShowAuth(true)} onLogout={handleLogout} />
 
-      <section className="max-w-6xl mx-auto px-4 py-12">
+      <Hero onLogin={() => setShowAuth(true)} />
+
+      <section id="games" className="max-w-6xl mx-auto px-4 py-12">
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold tracking-tight">Your Indie Game Hub</h1>
+          <h2 className="text-2xl font-bold tracking-tight">Featured games</h2>
           <p className="text-gray-600 mt-1">Play in the browser or download for your PC. Sign in to keep your progress.</p>
         </div>
 
@@ -38,6 +42,8 @@ function App() {
           ))}
         </div>
       </section>
+
+      <Footer />
 
       {showAuth && (
         <AuthModal open={showAuth} onClose={()=>setShowAuth(false)} onAuthed={(u)=>setUser(u)} />
